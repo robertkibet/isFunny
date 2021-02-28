@@ -1,0 +1,12 @@
+{
+  "name": "isFunny",
+  "displayName": "isFunny",
+  "expo": {
+    "name": "isFunny",
+    "slug": "isFunny",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
