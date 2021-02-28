@@ -7,11 +7,11 @@ export const Button = ({ buttons }: any) => {
       key={i}
       title={btn.title}
       type={btn.type}
-      buttonStyle={{...btn.style || null}}
+      buttonStyle={{ ...btn.style || null }}
       onPress={btn.onPress || null}
       icon={btn.icon || null}
-      iconRight={true}
-      titleStyle={{...btn.style || null}}
+      iconRight={btn.iconRight ? btn.iconRight : null}
+      titleStyle={{ ...btn.style || null }}
     />
   ))
 }

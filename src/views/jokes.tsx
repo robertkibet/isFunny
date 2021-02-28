@@ -52,10 +52,11 @@ export const Jokes = () => {
       alert(error.message);
     }
   };
-  const buttons = [
+  const buttonRight = [
     {
       title: 'Next',
       type: 'clear',
+      iconRight:true,
       onPress: () => {
         getJoke()
       },
@@ -64,6 +65,24 @@ export const Jokes = () => {
       },
       icon: <Icon icons={[{
         name: 'chevron-forward-outline',
+        type: 'ionicon',
+      },]} />
+
+    },
+  ]
+  const buttonLeft = [
+    {
+      title: 'Previous',
+      type: 'clear',
+      iconRight:false,
+      onPress: () => {
+        getJoke()
+      },
+      style: {
+        color: colors.dark,
+      },
+      icon: <Icon icons={[{
+        name: 'chevron-back-outline',
         type: 'ionicon',
       },]} />
 
@@ -101,8 +120,9 @@ export const Jokes = () => {
       >
         <View style={containerStyles.landing}>
           <TheJoke />
-          <View style={{ position: 'absolute', bottom: 0, right: 0 }}>
-            <Button buttons={buttons} />
+          <View style={{ position: 'absolute', bottom: 0, display:'flex', flexDirection:'row', justifyContent:'space-between', width:'100%' }}>
+            <Button buttons={buttonLeft} />
+            <Button buttons={buttonRight} />
           </View>
           <View style={containerStyles.shareIcons}>
             <Icon icons={icons} />

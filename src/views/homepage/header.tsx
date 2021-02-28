@@ -13,6 +13,7 @@ export const Header = () => {
   }
 
   const activateSidebar = () => {
+    console.log('clicked')
     showSidebar(!sidebar);
   }
   const icons = [
