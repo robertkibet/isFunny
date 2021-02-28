@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { Icon } from 'react-native-elements'
+import { Icon } from '../../components/icon';
 import { SideMenu } from '../../components/side-menu';
 import { colors, containerStyles } from '../../styles';
 
@@ -15,17 +15,20 @@ export const Header = () => {
   const activateSidebar = () => {
     showSidebar(!sidebar);
   }
+  const icons = [
+    {
+      type: "ionicon",
+      name: "menu-outline",
+      color: colors.dark,
+      size: 30,
+      onPress: () => activateSidebar()
+    }
+  ]
 
   return (
     <>
       <View style={containerStyles.header}>
-        <Icon
-          type="ionicon"
-          name="menu-outline"
-          color={colors.dark}
-          size={30}
-          onPress={() => activateSidebar()}
-        />
+        <Icon icons={icons} />
       </View>
       <SideBar />
 

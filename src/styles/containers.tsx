@@ -43,6 +43,20 @@ export const containerStyles = StyleSheet.create({
     position: 'absolute',
     paddingLeft: 20,
     paddingTop: 20,
-    zIndex:89
+    zIndex: 89
+  },
+  accountSideBarWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    paddingBottom: 20,
+  },
+  accountSideBarButtonsWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    paddingBottom: 20,
   }
 })
