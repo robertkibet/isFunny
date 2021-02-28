@@ -5,6 +5,9 @@ import { ActivityIndicator, View } from 'react-native';
 import { colors, containerStyles, textStyles } from '../styles';
 import { Text } from '../components/text';
 import { Icon } from '../components/icon';
+import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
+import { ScrollView } from 'react-native-gesture-handler';
+import { Button } from '../components/buttons';
 
 export const Jokes = () => {
   const [joke, setJoke] = useState(null);
@@ -18,8 +21,18 @@ export const Jokes = () => {
     const res = await fetchJokes();
     setJoke(res.joke);
   }
+  const swipeToNext = () => {
+    getJoke()
+  }
   const TheJoke = () => {
-    if (joke) return <Text style={{ ...textStyles.primary, fontSize: 25, minHeight: 300 }} message={joke || `I got no jokes ...loading`} />
+    if (joke) {
+
+      return (
+        <>
+          <Text style={{ ...textStyles.primary, fontSize: 25, minHeight: 300 }} message={joke || `I got no jokes ...loading`} />
+        </>
+      )
+    }
     return (
       <>
         <ActivityIndicator size="small" color={colors.dark} />
@@ -27,6 +40,23 @@ export const Jokes = () => {
       </>
     )
   }
+  const buttons = [
+    {
+      title: 'Next',
+      type: 'clear',
+      onPress: () => {
+        getJoke()
+      },
+      style: {
+        color: colors.dark,
+      },
+      icon: <Icon icons={[{
+        name: 'chevron-forward-outline',
+        type: 'ionicon',
+      },]} />
+
+    },
+  ]
   const icons = [
     {
       name: 'share',
@@ -44,13 +74,27 @@ export const Jokes = () => {
       onPress: () => console.log('bookmark')
     },
   ]
+
+  const config = {
+    velocityThreshold: 0.3,
+    directionalOffsetThreshold: 80
+  };
+
   return (
-    <View style={containerStyles.landing}>
-      <TheJoke />
-      <Divider />
-      <View style={containerStyles.shareIcons}>
-        <Icon icons={icons} />
+    <GestureRecognizer
+      onSwipeRight={() => swipeToNext()}
+      onSwipeLeft={() => swipeToNext()}
+      config={config}
+    >
+      <View style={containerStyles.landing}>
+        <TheJoke />
+        <View style={{ position: 'absolute', bottom: 0, right: 0 }}>
+          <Button buttons={buttons} />
+        </View>
+        <View style={containerStyles.shareIcons}>
+          <Icon icons={icons} />
+        </View>
       </View>
-    </View>
+    </GestureRecognizer>
   )
 }

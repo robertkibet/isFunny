@@ -28,6 +28,7 @@ export const AccountSideBar = () => {
       title: 'Facebook',
       style: {
         backgroundColor: '#3b5998',
+        color:'white'
       },
       onPress: () => {
         console.log('fb');
