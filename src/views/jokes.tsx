@@ -25,18 +25,9 @@ export const Jokes = () => {
     getJoke()
   }
   const TheJoke = () => {
-    if (joke) {
-
-      return (
-        <>
-          <Text style={{ ...textStyles.primary, fontSize: 25, minHeight: 300 }} message={joke || `I got no jokes ...loading`} />
-        </>
-      )
-    }
     return (
       <>
-        <ActivityIndicator size="small" color={colors.dark} />
-        <Text style={{ ...textStyles.primary, paddingTop: 10, fontSize: 15, minHeight: 300 }} message="Ooooweee! Jokes on the way" />
+        <Text style={{ ...textStyles.primary, fontSize: 25, minHeight: 300 }} message={joke || `I got no jokes ...loading`} />
       </>
     )
   }
@@ -101,21 +92,29 @@ export const Jokes = () => {
     directionalOffsetThreshold: 80
   };
 
+  if (joke) {
+    return (
+      <GestureRecognizer
+        onSwipeRight={() => swipeToNext()}
+        onSwipeLeft={() => swipeToNext()}
+        config={config}
+      >
+        <View style={containerStyles.landing}>
+          <TheJoke />
+          <View style={{ position: 'absolute', bottom: 0, right: 0 }}>
+            <Button buttons={buttons} />
+          </View>
+          <View style={containerStyles.shareIcons}>
+            <Icon icons={icons} />
+          </View>
+        </View>
+      </GestureRecognizer>
+    )
+  }
   return (
-    <GestureRecognizer
-      onSwipeRight={() => swipeToNext()}
-      onSwipeLeft={() => swipeToNext()}
-      config={config}
-    >
-      <View style={containerStyles.landing}>
-        <TheJoke />
-        <View style={{ position: 'absolute', bottom: 0, right: 0 }}>
-          <Button buttons={buttons} />
-        </View>
-        <View style={containerStyles.shareIcons}>
-          <Icon icons={icons} />
-        </View>
-      </View>
-    </GestureRecognizer>
+    <View style={containerStyles.landing}>
+      <ActivityIndicator size="small" color={colors.dark} />
+      <Text style={{ ...textStyles.primary, paddingTop: 10, fontSize: 15, minHeight: 300 }} message="Ooooweee! Jokes on the way" />
+    </View>
   )
 }
