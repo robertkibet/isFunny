@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, BackHandler, Alert } from 'react-native';
+import { View, BackHandler } from 'react-native';
 import { Jokes } from './src/views/jokes';
 import { containerStyles } from './src/styles';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
