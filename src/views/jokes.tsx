@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Divider, Icon } from 'react-native-elements';
 import { fetchJokes } from '../api';
-import { View } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 import { buttonStyles, colors, containerStyles, textStyles } from '../styles';
 import { iconStyles } from '../styles/icons';
 import { Text } from '../components/text';
@@ -20,35 +20,34 @@ export const Jokes = () => {
     const res = await fetchJokes();
     setJoke(res.joke);
   }
+  const TheJoke = () => {
+    if (joke) return <Text style={{ ...textStyles.primary, fontSize: 30, minHeight: 300 }} message={joke || `I got no jokes ...loading`} />
+    return (
+      <>
+        <ActivityIndicator size="small" color={colors.dark} />
+        <Text style={{ ...textStyles.primary, paddingTop:10, fontSize: 15, minHeight: 300 }} message="Ooooweee! Jokes on the way" />
+      </>
+    )
+  }
   return (
     <View style={containerStyles.landing}>
-      <Text style={{...textStyles.primary, fontSize:30, minHeight:300}} message={joke}/>
+      <TheJoke />
       <Divider />
       <View style={containerStyles.shareIcons}>
         <Icon
           name='share'
           type='material'
-          onPress={()=>console.log('shared')}
+          onPress={() => console.log('shared')}
         />
         <Icon
           name='content-copy'
           type='material'
-          onPress={()=>console.log('copied')}
+          onPress={() => console.log('copied')}
         />
         <Icon
           name='bookmark-outline'
           type='ionicon'
-          onPress={()=>console.log('bookmark')}
-        />
-      </View>
-
-      <View style={containerStyles.buttonBottom}>
-        <Button
-          title="Outline button"
-          type="outline"
-          onPress={() => getJoke()}
-          buttonStyle={buttonStyles.landing}
-          titleStyle={textStyles.primaryButton}
+          onPress={() => console.log('bookmark')}
         />
       </View>
     </View>

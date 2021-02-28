@@ -1,14 +1,15 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { colors } from './global/colors-enums';
-const { width, height } = Dimensions.get('window');
+export const { width, height } = Dimensions.get('window');
 
 export const containerStyles = StyleSheet.create({
   landing: {
-    height: (height - 40),
+    height: (height - 80),
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 200
+    paddingTop: 150,
+    paddingBottom: 20
   },
   index: {
     // padding: 20,
@@ -41,6 +42,7 @@ export const containerStyles = StyleSheet.create({
     backgroundColor: 'transparent',
     position: 'absolute',
     paddingLeft: 20,
-    paddingTop: 20
+    paddingTop: 20,
+    zIndex:89
   }
 })
