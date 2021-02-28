@@ -5,9 +5,10 @@ import { ActivityIndicator, View } from 'react-native';
 import { colors, containerStyles, textStyles } from '../styles';
 import { Text } from '../components/text';
 import { Icon } from '../components/icon';
-import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
-import { ScrollView } from 'react-native-gesture-handler';
+import GestureRecognizer from 'react-native-swipe-gestures';
 import { Button } from '../components/buttons';
+import Clipboard from 'expo-clipboard';
+import Toast from 'react-native-simple-toast';
 
 export const Jokes = () => {
   const [joke, setJoke] = useState(null);
@@ -40,6 +41,11 @@ export const Jokes = () => {
       </>
     )
   }
+  const copy=()=>{
+    const text = joke || '';
+    Clipboard.setString(`"${text}"\nDownload The Joker app from playstore to enjoy this and more :)`);
+    Toast.show('Joke copied. Share away :)');
+  }
   const buttons = [
     {
       title: 'Next',
@@ -66,7 +72,7 @@ export const Jokes = () => {
     {
       name: 'content-copy',
       type: 'material',
-      onPress: () => console.log('copy')
+      onPress: () => copy()
     },
     {
       name: 'bookmark-outline',
