@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Divider } from 'react-native-elements';
 import { fetchJokes } from '../api';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, View, Share } from 'react-native';
 import { colors, containerStyles, textStyles } from '../styles';
 import { Text } from '../components/text';
 import { Icon } from '../components/icon';
@@ -41,11 +40,27 @@ export const Jokes = () => {
       </>
     )
   }
-  const copy=()=>{
+  const copy = () => {
     const text = joke || '';
     Clipboard.setString(`"${text}"\nDownload The Joker app from playstore to enjoy this and more :)`);
     Toast.show('Joke copied. Share away :)');
   }
+  const shareThis = async () => {
+    try {
+      const message = `"${joke}"\nDownload The Joker app from playstore to enjoy this and more :)` || '';
+      const result = await Share.share({
+        message,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) Toast.show('You just shared a smile away :D');
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+        Toast.show('Ooops! Next time be nice and share a smile ;P');
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   const buttons = [
     {
       title: 'Next',
@@ -67,7 +82,7 @@ export const Jokes = () => {
     {
       name: 'share',
       type: 'material',
-      onPress: () => console.log('shared')
+      onPress: () => shareThis()
     },
     {
       name: 'content-copy',
